@@ -1,4 +1,5 @@
-import 'package:bloc_curd/screen/add_user_detail.dart';
+import 'package:bloc_curd/screen/AddUser/add_user_detail.dart';
+import 'package:bloc_curd/screen/ShowUser/show_user_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _SplashScreeenState extends State<SplashScreeen> {
     Future.delayed(Duration(seconds: 2), () {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => AddUserDetail()),
+        MaterialPageRoute(builder: (context) => GetUserDetails()),
         (route) => false,
       );
     });
@@ -29,7 +30,14 @@ class _SplashScreeenState extends State<SplashScreeen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [Text("Sqflite")],
+        children: [
+          Center(
+              child: Text(
+            "Sqflite Using \nBloc",
+            style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500),
+            textAlign: TextAlign.center,
+          ))
+        ],
       ),
     );
   }

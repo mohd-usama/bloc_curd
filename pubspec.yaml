@@ -39,6 +39,9 @@ dependencies:
   sqflite: ^2.4.1
   image_picker: ^1.2.0
   camera:
+  equatable: ^2.0.8
+  intl:
+
 
 dev_dependencies:
   flutter_test:
