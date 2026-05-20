@@ -4,9 +4,9 @@ import 'package:equatable/equatable.dart';
 class ShowUserState extends Equatable {
   final List<UserModel> showUserList;
   final bool isLoading;
-  final String error;
+  final String isError;
 
-  ShowUserState({this.showUserList = const [], this.isLoading = false, this.error = ""});
+  const ShowUserState({this.showUserList = const [], this.isLoading = false, this.isError = ""});
 
   ShowUserState copyWith({
     List<UserModel>? showUserList,
@@ -16,10 +16,10 @@ class ShowUserState extends Equatable {
     return ShowUserState(
       showUserList: showUserList ?? this.showUserList,
       isLoading: isLoading ?? this.isLoading,
-      error: error ?? this.error,
+      isError: error ?? isError,
     );
   }
 
   @override
-  List<Object?> get props => [showUserList,isLoading,error];
+  List<Object?> get props => [showUserList,isLoading,isError];
 }

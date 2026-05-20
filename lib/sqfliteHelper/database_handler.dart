@@ -14,18 +14,39 @@ class DatabaseHelper {
 
     try {
       String path = '${await getDatabasesPath()}userData.db';
-      _database = await openDatabase(path, version: version, onCreate: (db, version) {
-        return db.execute(
-          "CREATE TABLE $tableName("
-              " id INTEGER PRIMARY KEY, "
-              " name TEXT NOT NULL, "
-              " qualification TEXT NOT NULL, "
-              " mobileNo TEXT NOT NULL, "
-              " dob TEXT NOT NULL, "
-              " profileImg TEXT, "
-              " age TEXT NOT NULL)",
-        );
-      });
+
+      _database = await openDatabase(
+        path,
+        version: version,
+        onCreate: (db, version) async {
+          // USER TABLE
+          await db.execute(
+            '''
+          CREATE TABLE $tableName(
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            mobileNo TEXT NOT NULL,
+            dob TEXT NOT NULL,
+            profileImg TEXT,
+            age TEXT NOT NULL
+          )
+          ''',
+          );
+
+          // QUALIFICATION TABLE
+          await db.execute(
+            '''
+          CREATE TABLE qualifications(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            qualification TEXT,
+            passing_year TEXT,
+            marks TEXT
+          )
+          ''',
+          );
+        },
+      );
     } catch (e) {
       print(e);
     }
@@ -44,7 +65,7 @@ class DatabaseHelper {
   }
 
   static Future<List<Map<String, dynamic>>> query() async {
-    return  _database!.query(tableName); // getlist
+    return _database!.query(tableName);
   }
 
   static Future<int> update(UserModel userModel) async {

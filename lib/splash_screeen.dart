@@ -13,14 +13,9 @@ class SplashScreeen extends StatefulWidget {
 class _SplashScreeenState extends State<SplashScreeen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 2), () {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => GetUserDetails()),
-        (route) => false,
-      );
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => GetUserDetails()), (route) => false);
     });
   }
 
@@ -33,7 +28,7 @@ class _SplashScreeenState extends State<SplashScreeen> {
         children: [
           Center(
               child: Text(
-            "Sqflite Using \nBloc",
+            "SQLite Using \nBloc",
             style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500),
             textAlign: TextAlign.center,
           ))

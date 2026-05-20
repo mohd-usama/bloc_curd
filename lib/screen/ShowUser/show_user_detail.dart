@@ -99,12 +99,12 @@ class _GetUserDetailsState extends State<GetUserDetails> with CustomTextFieldWid
                         Text(user.age ?? "", style: customTextStyle),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Text("Qualification : ", style: customTextStyle),
-                        Text(user.qualification ?? "", style: customTextStyle),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Text("Qualification : ", style: customTextStyle),
+                    //     Text(user.qualification ?? "", style: customTextStyle),
+                    //   ],
+                    // ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(

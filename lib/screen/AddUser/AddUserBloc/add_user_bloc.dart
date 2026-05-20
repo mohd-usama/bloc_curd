@@ -2,24 +2,23 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:bloc_curd/sqfliteHelper/database_handler.dart';
+import 'package:flutter/cupertino.dart';
 
+import '../../../Model/add_qualification_model.dart';
 import 'add_user_event.dart';
 import 'add_user_state.dart';
 
 class AddUserBloC extends Bloc<AddUserEvent, AddUserState> {
+
   AddUserBloC() : super(const AddUserState()) {
     on<SubmitUser>((event, emit) async {
       emit(state.copyWith(isLoading: true, error: null, isSuccess: false));
 
       try {
         await DatabaseHelper.insert(event.user);
-
         emit(state.copyWith(isLoading: false, isSuccess: true));
       } catch (e) {
-        emit(state.copyWith(
-          isLoading: false,
-          error: "Insert failed",
-        ));
+        emit(state.copyWith(isLoading: false, error: "Insert failed"));
       }
     });
 
@@ -28,11 +27,17 @@ class AddUserBloC extends Bloc<AddUserEvent, AddUserState> {
       await DatabaseHelper.delete(event.id);
     });
 
-
     on<UpdateUser>((event, emit) async {
       emit(state.copyWith(isLoading: true, error: null, isSuccess: false));
       await DatabaseHelper.update(event.id);
       emit(state.copyWith(isLoading: false, isSuccess: true));
+    });
+
+    on<AddMoreQualificationDetails>((event, emit) async {
+      List<AddQualificationModel> updatedList = List.from(state.addQualificationDetails ?? []);
+      updatedList.add(
+          AddQualificationModel(event.selectedQualification, event.selectPassingYear, TextEditingController(text: event.text)));
+      emit(state.copyWith(addQualificationDetails: updatedList));
     });
   }
 }
